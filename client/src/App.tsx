@@ -17,6 +17,8 @@ import {
   Stack,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
@@ -47,12 +49,19 @@ const Footer = () => {
 };
 
 const Menu = () => {
+  const theme = useTheme();
+  const isNarrow = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Stack direction="row" spacing={2} justifyContent="center">
+    <Stack
+      direction={isNarrow ? "column" : "row"}
+      spacing={2}
+      justifyContent="center"
+    >
       <Button variant="outlined" startIcon={<DocumentScanner />}>
         Scan
       </Button>
-      <ButtonGroup variant="outlined">
+      <ButtonGroup variant="outlined" fullWidth={isNarrow}>
         <Button startIcon={<Upload />}>Upload</Button>
         <Button endIcon={<Download />}>Download</Button>
       </ButtonGroup>
