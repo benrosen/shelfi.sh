@@ -1,6 +1,18 @@
 import {
+  DocumentScanner,
+  Download,
+  GitHub,
+  Help,
+  Search,
+  Upload,
+} from "@mui/icons-material";
+import {
   Autocomplete,
+  Button,
+  ButtonGroup,
   Container,
+  InputAdornment,
+  Link,
   Paper,
   Stack,
   TextField,
@@ -18,9 +30,36 @@ const Icon = () => {
 
 const Title = () => {
   return (
-    <Typography variant="h6">
-      <Icon /> shelfi.sh
+    <Typography variant="h6" fontFamily="serif" py={2}>
+      shelfi.sh
     </Typography>
+  );
+};
+
+const Footer = () => {
+  return (
+    <Stack direction="row" justifyContent="center" py={1}>
+      <Link href="https://github.com/benrosen/shelfi.sh">
+        <GitHub />
+      </Link>
+    </Stack>
+  );
+};
+
+const Menu = () => {
+  return (
+    <Stack direction="row" spacing={2} justifyContent="center">
+      <Button variant="outlined" startIcon={<DocumentScanner />}>
+        Scan
+      </Button>
+      <ButtonGroup variant="outlined">
+        <Button startIcon={<Upload />}>Upload</Button>
+        <Button endIcon={<Download />}>Download</Button>
+      </ButtonGroup>
+      <Button variant="outlined" startIcon={<Help />}>
+        Help
+      </Button>
+    </Stack>
   );
 };
 
@@ -34,7 +73,20 @@ const SearchBar = () => {
       autoHighlight
       disableCloseOnSelect
       renderInput={(params) => {
-        return <TextField {...params} label="Search your bookshelf" />;
+        return (
+          <TextField
+            {...params}
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+            label="Search your bookshelf"
+          />
+        );
       }}
       groupBy={(option) => {
         return option.title;
@@ -48,7 +100,7 @@ const SearchBar = () => {
           <li {...props}>
             <Stack width="100%" direction="row" justifyContent="space-between">
               <Typography>
-                {parts.map((part, index) => {
+                {parts.map((part) => {
                   return (
                     <span style={{ fontWeight: part.highlight ? 700 : 400 }}>
                       {part.text}
@@ -62,7 +114,7 @@ const SearchBar = () => {
         );
       }}
       PaperComponent={(props) => {
-        return <Paper elevation={0} variant="outlined" {...props} />;
+        return <Paper elevation={4} sx={{ mt: 1 }} {...props} />;
       }}
     />
   );
@@ -71,13 +123,24 @@ const SearchBar = () => {
 function App() {
   return (
     <Container maxWidth="sm" sx={{ height: "100vh" }}>
-      <Stack direction="column" py={1} spacing={1}>
-        <Stack direction="row">
-          <Title />
-        </Stack>
-        <Stack direction="row" py={2}>
+      <Stack direction="column" height="100%">
+        <Title />
+        <Stack
+          direction="column"
+          py={2}
+          spacing={2}
+          flexGrow={1}
+          justifyContent="center"
+        >
+          <Stack direction="row" justifyContent="center">
+            <Typography variant="h1">
+              <Icon />
+            </Typography>
+          </Stack>
           <SearchBar />
+          <Menu />
         </Stack>
+        <Footer />
       </Stack>
     </Container>
   );
