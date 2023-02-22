@@ -2,7 +2,6 @@ import {
   DocumentScanner,
   Download,
   GitHub,
-  Help,
   Search,
   Upload,
 } from "@mui/icons-material";
@@ -11,12 +10,16 @@ import {
   Container,
   createTheme,
   CssBaseline,
+  FormControlLabel,
+  FormGroup,
+  FormGroupProps,
   IconButton,
   IconButtonProps,
   InputAdornment,
   Link,
   Paper,
   Stack,
+  Switch,
   TextField,
   ThemeProvider,
   Typography,
@@ -159,10 +162,18 @@ const UploadButton = (props: IconButtonProps) => {
   );
 };
 
-const HelpButton = (props: IconButtonProps) => {
+const HelpButton = (props: FormGroupProps) => {
   return (
-    <IconButton {...props} component="span">
-      <Help />
+    <FormGroup {...props}>
+      <FormControlLabel control={<Switch />} label="Help" />
+    </FormGroup>
+  );
+};
+
+const ScanButton = () => {
+  return (
+    <IconButton>
+      <DocumentScanner />
     </IconButton>
   );
 };
@@ -172,12 +183,16 @@ const Menu = () => {
   const isNarrow = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Stack direction={"row"} spacing={2} justifyContent="end">
-      <UploadButton />
-      <DownloadButton />
-      <IconButton>
-        <DocumentScanner />
-      </IconButton>
+    <Stack direction={"row"} spacing={2}>
+      <Stack direction="row" flexGrow={1}>
+        <Stack direction="row">
+          <UploadButton />
+          <DownloadButton />
+        </Stack>
+        <Stack flexGrow={1} direction="row" justifyContent="center">
+          <ScanButton />
+        </Stack>
+      </Stack>
       <HelpButton />
     </Stack>
   );
@@ -372,7 +387,7 @@ function App() {
                 flexGrow={1}
                 justifyContent="center"
               >
-                <Paper elevation={8} sx={{ p: 4, borderRadius: 2 }}>
+                <Paper elevation={8} sx={{ p: 2, borderRadius: 2 }}>
                   <Stack spacing={1}>
                     <SearchBar />
                     <Menu />
