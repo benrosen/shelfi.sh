@@ -1,5 +1,5 @@
-import { CenterFocusStrong } from "@mui/icons-material";
-import { Box, IconButton, Paper, Stack } from "@mui/material";
+import { PanoramaFishEye } from "@mui/icons-material";
+import { Box, Button, Paper, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { HelpSwitch } from "../help-switch";
 import { NavigationBar } from "../navigation-bar";
@@ -16,9 +16,9 @@ export const Scanner = () => {
         <Box sx={{ visibility: "hidden" }}>
           <HelpSwitch />
         </Box>
-        <IconButton component={Link} to={RoutePaths.Editor}>
-          <CenterFocusStrong />
-        </IconButton>
+        <Button variant="contained" component={Link} to={RoutePaths.Editor}>
+          <PanoramaFishEye />
+        </Button>
         <HelpSwitch />
       </Stack>
     </Stack>
