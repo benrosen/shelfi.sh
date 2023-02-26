@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
+import { useLocalStorage } from "../../hooks/use-local-storage";
 import { Bookshelf as BookshelfType } from "../../types";
 import { BookshelfContext } from "./bookshelf-context";
-import { useLocalStorage } from "./use-local-storage";
 
 export const Bookshelf = ({ children }: PropsWithChildren) => {
   const bookshelf = useLocalStorage<BookshelfType>({

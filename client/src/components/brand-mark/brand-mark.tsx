@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import React from "react";
 
-export const Title = () => {
+export const BrandMark = () => {
   return (
     <Typography
       variant="h4"

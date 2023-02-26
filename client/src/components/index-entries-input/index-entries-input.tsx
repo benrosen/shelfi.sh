@@ -1,7 +1,9 @@
+import { Paper } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 
 // TODO remember page size
+// TODO
 export const IndexEntriesInput = () => {
   const [rowsPerPageOptions, setRowsPerPageOptions] = useState([5, 25, 100]);
 
@@ -10,28 +12,30 @@ export const IndexEntriesInput = () => {
   const [rows, setRows] = useState([]);
 
   return (
-    <DataGrid
-      autoHeight
-      columns={[
-        {
-          field: "label",
-          headerName: "Topic",
-          editable: true,
-          type: "string",
-          flex: 1,
-        },
-        {
-          field: "pages",
-          headerName: "Locations",
-          editable: true,
-          type: "string",
-          flex: 1,
-        },
-      ]}
-      rows={rows}
-      pageSize={rowsPerPage}
-      rowsPerPageOptions={rowsPerPageOptions}
-      onPageSizeChange={setRowsPerPage}
-    />
+    <Paper elevation={0}>
+      <DataGrid
+        autoHeight
+        columns={[
+          {
+            field: "label",
+            headerName: "Topic",
+            editable: true,
+            type: "string",
+            flex: 1,
+          },
+          {
+            field: "pages",
+            headerName: "Locations",
+            editable: true,
+            type: "string",
+            flex: 1,
+          },
+        ]}
+        rows={rows}
+        pageSize={rowsPerPage}
+        rowsPerPageOptions={rowsPerPageOptions}
+        onPageSizeChange={setRowsPerPage}
+      />
+    </Paper>
   );
 };

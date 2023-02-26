@@ -1,13 +1,22 @@
 import { Autocomplete, TextField } from "@mui/material";
+import { usePreviouslyEnteredTitle } from "../previously-entered-title";
+import { useBookshelfTitles } from "./use-bookshelf-titles";
 
-// TODO options = all titles in the saved index
-// TODO default value = last title that you put in
 export const TitleInput = () => {
+  const bookshelfTitles = useBookshelfTitles();
+
+  const [previouslyEnteredTitle, setPreviouslyEnteredTitle] =
+    usePreviouslyEnteredTitle();
+
   return (
     <Autocomplete
       freeSolo
-      options={[]}
+      options={bookshelfTitles}
       renderInput={(params) => <TextField {...params} required label="Title" />}
+      value={previouslyEnteredTitle}
+      onChange={(event, value) => {
+        value && setPreviouslyEnteredTitle(value);
+      }}
     />
   );
 };

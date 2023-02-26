@@ -3,9 +3,9 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { Background } from "../background";
 import { Bookshelf } from "../bookshelf";
+import { BrandMark } from "../brand-mark";
 import { Footer } from "../footer";
 import { Theme } from "../theme";
-import { Title } from "../title";
 
 export const Root = () => {
   return (
@@ -15,7 +15,7 @@ export const Root = () => {
         <Stack direction="column" height="100vh">
           <Container maxWidth="sm" sx={{ flexGrow: 1 }}>
             <Stack direction="column" height="100%">
-              <Title />
+              <BrandMark />
               <Stack direction="column" flexGrow={1} justifyContent="start">
                 <Paper elevation={8} sx={{ p: 2, borderRadius: 2 }}>
                   <Outlet />
