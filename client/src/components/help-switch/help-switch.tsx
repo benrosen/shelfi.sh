@@ -9,7 +9,7 @@ import React from "react";
 export const HelpSwitch = (props: FormGroupProps) => {
   return (
     <FormGroup {...props}>
-      <FormControlLabel control={<Switch />} label="Help" />
+      <FormControlLabel control={<Switch disabled />} label="Help" />
     </FormGroup>
   );
 };
