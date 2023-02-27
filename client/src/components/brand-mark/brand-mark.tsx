@@ -1,5 +1,7 @@
 import { Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
+import { RoutePaths } from "../router";
 
 export const BrandMark = () => {
   return (
@@ -10,7 +12,12 @@ export const BrandMark = () => {
       color="primary"
       sx={{ userSelect: "none" }}
     >
-      🐚 shelfi.sh
+      <Link
+        to={RoutePaths.Home}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        🐚 shelfi.sh
+      </Link>
     </Typography>
   );
 };
