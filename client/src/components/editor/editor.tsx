@@ -18,10 +18,10 @@ export const Editor = () => {
       <Divider />
       <PreviouslyEnteredTitle>
         <TitleInput />
-        <PreviouslyEnteredAuthors>
-          <AuthorsInput />
-        </PreviouslyEnteredAuthors>
       </PreviouslyEnteredTitle>
+      <PreviouslyEnteredAuthors>
+        <AuthorsInput />
+      </PreviouslyEnteredAuthors>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box sx={{ visibility: "hidden" }}>
           <HelpSwitch />
