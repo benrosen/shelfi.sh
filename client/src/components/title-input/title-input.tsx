@@ -15,7 +15,7 @@ export const TitleInput = () => {
       renderInput={(params) => <TextField {...params} required label="Title" />}
       value={previouslyEnteredTitle}
       onChange={(event, value) => {
-        value && setPreviouslyEnteredTitle(value);
+        setPreviouslyEnteredTitle(value ?? "");
       }}
     />
   );

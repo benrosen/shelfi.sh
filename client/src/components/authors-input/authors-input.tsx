@@ -3,7 +3,6 @@ import { usePreviouslyEnteredAuthors } from "../previously-entered-authors";
 import { useBookshelfAuthors } from "./use-bookshelf-authors";
 
 // TODO try to get authors from title when value of title input changes
-// TODO default value = last authors you put in
 export const AuthorsInput = () => {
   const bookshelfAuthors = useBookshelfAuthors();
 
@@ -25,7 +24,7 @@ export const AuthorsInput = () => {
       )}
       value={previouslyEnteredAuthors}
       onChange={(event, value) => {
-        value && setPreviouslyEnteredAuthors(value);
+        setPreviouslyEnteredAuthors(value ?? []);
       }}
     />
   );
