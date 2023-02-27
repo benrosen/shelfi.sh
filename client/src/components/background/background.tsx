@@ -12,11 +12,11 @@ export const Background = () => {
     return theme.palette.mode === "light"
       ? {
           fillColor: theme.palette.primary.main,
-          opacity: 0.25,
+          opacity: 0.075,
         }
       : {
           fillColor: theme.palette.text.secondary,
-          opacity: 0.1,
+          opacity: 0.025,
         };
   }, [theme.palette.mode]);
 
