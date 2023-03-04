@@ -7,17 +7,39 @@ import {
   Paper,
   Stack,
 } from "@mui/material";
-import { useCallback, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
+import { getIndexEntriesFromImage } from "../../functions/get-index-entries-from-image";
 import { HelpSwitch } from "../help-switch";
+import { useIndexEntries } from "../index-entries";
 import { NavigationBar } from "../navigation-bar";
 import { RoutePaths } from "../router";
 
 export const Scanner = () => {
   const webcamReference = useRef<Webcam>(null);
 
+  const [, setIndexEntries] = useIndexEntries();
+
   const [image, setImage] = useState<string | null>(null);
+
+  const navigateTo = useNavigate();
+
+  useEffect(() => {
+    setImage(null);
+  }, []);
+
+  useEffect(() => {
+    if (!image) {
+      return;
+    }
+
+    getIndexEntriesFromImage({ image }).then((recognizedIndexEntries) => {
+      setIndexEntries(recognizedIndexEntries);
+
+      navigateTo(RoutePaths.Editor);
+    });
+  }, [image, setIndexEntries]);
 
   const [hasUserMedia, setHasUserMedia] = useState<boolean>();
 
@@ -26,8 +48,10 @@ export const Scanner = () => {
       return;
     }
 
-    setImage(webcamReference.current.getScreenshot());
-  }, [webcamReference]);
+    const screenshot = webcamReference.current.getScreenshot();
+
+    setImage(screenshot);
+  }, [webcamReference, setImage]);
 
   return (
     <Stack direction="column" spacing={2}>
@@ -60,6 +84,9 @@ export const Scanner = () => {
             onUserMediaError={() => {
               setHasUserMedia(false);
             }}
+            videoConstraints={{
+              facingMode: "environment",
+            }}
           />
         </Paper>
       </Grow>
@@ -73,8 +100,9 @@ export const Scanner = () => {
         </Box>
         <Button
           variant="contained"
-          component={Link}
-          to={RoutePaths.Editor}
+          // component={Link}
+          onClick={captureImage}
+          // to={RoutePaths.Editor}
           disabled={!hasUserMedia}
         >
           <PanoramaFishEye />
